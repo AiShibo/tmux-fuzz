@@ -1,0 +1,13 @@
+1754595682.317341 client started (7616): version next-3.6, socket /tmp/tmux-0/default, protocol 8
+1754595682.317386 on FreeBSD 14.3-RELEASE FreeBSD 14.3-RELEASE releng/14.3-n271432-8c9ce319fef7 GENERIC
+1754595682.317403 using libevent 2.1.12-stable poll
+1754595682.317414 using ncurses 6.5 20240427
+1754595682.317486 flags are 0x18010000
+1754595682.317498 socket is /tmp/tmux-0/default
+1754595682.317515 trying connect
+1754595682.317542 connect failed: Connection refused
+1754595682.317561 lock file is /tmp/tmux-0/default.lock
+1754595682.317673 flock succeeded
+1754595682.317684 got lock (6)
+1754595682.317694 trying connect
+1754595682.317725 connect failed: Connection refused
