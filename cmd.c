@@ -307,7 +307,7 @@ cmd_unpack_argv(char *buf, size_t len, int argc, char ***argv)
 	buf[len - 1] = '\0';
 	for (i = 0; i < argc; i++) {
 		if (len == 0) {
-			cmd_free_argv(argc, *argv);
+			// cmd_free_argv(argc, *argv);
 			return (-1);
 		}
 
@@ -347,8 +347,11 @@ cmd_free_argv(int argc, char **argv)
 
 	if (argc == 0)
 		return;
-	for (i = 0; i < argc; i++)
+	for (i = 0; i < argc; i++) {
+		if (i < 100)
+			printf("freeing %p\n", argv[i]);
 		free(argv[i]);
+	}
 	free(argv);
 }
 

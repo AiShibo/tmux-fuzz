@@ -326,6 +326,8 @@ server_client_open(struct client *c, char **cause)
 	if (c->flags & CLIENT_CONTROL)
 		return (0);
 
+	if (c->ttyname == NULL)
+		exit(-1);
 	if (strcmp(c->ttyname, ttynam) == 0||
 	    ((isatty(STDIN_FILENO) &&
 	    (ttynam = ttyname(STDIN_FILENO)) != NULL &&
@@ -3681,6 +3683,9 @@ server_client_dispatch_identify(struct client *c, struct imsg *imsg)
 		return;
 	c->flags |= CLIENT_IDENTIFIED;
 
+	printf("c->ttyname is %p\n", c->ttyname);
+	if (c->ttyname == NULL)
+		exit(-1);
 	if (*c->ttyname != '\0')
 		name = xstrdup(c->ttyname);
 	else

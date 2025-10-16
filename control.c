@@ -269,6 +269,7 @@ control_discard_pane(struct client *c, struct control_pane *cp)
 	struct control_state	*cs = c->control_state;
 	struct control_block	*cb, *cb1;
 
+
 	TAILQ_FOREACH_SAFE(cb, &cp->blocks, entry, cb1) {
 		TAILQ_REMOVE(&cp->blocks, cb, entry);
 		control_free_block(cs, cb);
@@ -366,6 +367,8 @@ control_continue_pane(struct client *c, struct window_pane *wp)
 		cp->flags &= ~CONTROL_PANE_PAUSED;
 		memcpy(&cp->offset, &wp->offset, sizeof cp->offset);
 		memcpy(&cp->queued, &wp->offset, sizeof cp->queued);
+		if (wp == NULL)
+			exit(-1);
 		control_write(c, "%%continue %%%u", wp->id);
 	}
 }
@@ -808,6 +811,9 @@ control_discard(struct client *c)
 {
 	struct control_state	*cs = c->control_state;
 	struct control_pane	*cp;
+
+	if (cs == NULL)
+		exit(-1);
 
 	RB_FOREACH(cp, control_panes, &cs->panes)
 		control_discard_pane(c, cp);
